@@ -1,0 +1,396 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| Week2              |
+| Week3              |
+| Week4              |
+| mysql              |
+| performance_schema |
+| student_info       |
+| sys                |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use Week2;
+Database changed
+mysql> create table employee(emp _id int)
+    -> ();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '_id int)
+()' at line 1
+mysql> create table employee(emp_id int(4),f_name varchar(10), l_name varchar(10),job_type varchar(10), salary int(10), dept varchar(10), commission int(7), manager_id int(4));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int(4)      | YES  |     | NULL    |       |
+| f_name     | varchar(10) | YES  |     | NULL    |       |
+| l_name     | varchar(10) | YES  |     | NULL    |       |
+| job_type   | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(10)     | YES  |     | NULL    |       |
+| dept       | varchar(10) | YES  |     | NULL    |       |
+| commission | int(7)      | YES  |     | NULL    |       |
+| manager_id | int(4)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> alter table employee modify emp_id int(4) primary key;
+Query OK, 0 rows affected (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int(4)      | NO   | PRI | NULL    |       |
+| f_name     | varchar(10) | YES  |     | NULL    |       |
+| l_name     | varchar(10) | YES  |     | NULL    |       |
+| job_type   | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(10)     | YES  |     | NULL    |       |
+| dept       | varchar(10) | YES  |     | NULL    |       |
+| commission | int(7)      | YES  |     | NULL    |       |
+| manager_id | int(4)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table employee modify f_name varchar(10) not null;
+Query OK, 0 rows affected (0.31 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee modify salary int(10)  not null;
+Query OK, 0 rows affected (0.31 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| emp_id     | int(4)      | NO   | PRI | NULL    |       |
+| f_name     | varchar(10) | NO   |     | NULL    |       |
+| l_name     | varchar(10) | YES  |     | NULL    |       |
+| job_type   | varchar(10) | YES  |     | NULL    |       |
+| salary     | int(10)     | NO   |     | NULL    |       |
+| dept       | varchar(10) | YES  |     | NULL    |       |
+| commission | int(7)      | YES  |     | NULL    |       |
+| manager_id | int(4)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table employee add date_of_joining date();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> alter table employee add date_of_joining date;
+Query OK, 0 rows affected (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| emp_id          | int(4)      | NO   | PRI | NULL    |       |
+| f_name          | varchar(10) | NO   |     | NULL    |       |
+| l_name          | varchar(10) | YES  |     | NULL    |       |
+| job_type        | varchar(10) | YES  |     | NULL    |       |
+| salary          | int(10)     | NO   |     | NULL    |       |
+| dept            | varchar(10) | YES  |     | NULL    |       |
+| commission      | int(7)      | YES  |     | NULL    |       |
+| manager_id      | int(4)      | YES  |     | NULL    |       |
+| date_of_joining | date        | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> create table department(d_name varchar(10) primary key ,d_loc varchar(10), HOD_id int(4));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> desc department;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| d_name | varchar(10) | NO   | PRI | NULL    |       |
+| d_loc  | varchar(10) | YES  |     | NULL    |       |
+| HOD_id | int(4)      | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table location(loc_id int(4), city varchar(10), contact_no int(10));
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> desc location;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| loc_id     | int(4)      | YES  |     | NULL    |       |
+| city       | varchar(10) | YES  |     | NULL    |       |
+| contact_no | int(10)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table location modify city varchar(15);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc location;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| loc_id     | int(4)      | YES  |     | NULL    |       |
+| city       | varchar(15) | YES  |     | NULL    |       |
+| contact_no | int(10)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table location drop column contact_no;
+Query OK, 0 rows affected (0.31 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc location;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| loc_id | int(4)      | YES  |     | NULL    |       |
+| city   | varchar(15) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table location change city address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table location change column  city address varchar(15);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc location;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| loc_id  | int(4)      | YES  |     | NULL    |       |
+| address | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table location rename to loc;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc loc;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| loc_id  | int(4)      | YES  |     | NULL    |       |
+| address | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into loc values(1, 'Kolkata');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into loc values(2, 'Mumbai');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from loc;
++--------+---------+
+| loc_id | address |
++--------+---------+
+|      1 | Kolkata |
+|      2 | Mumbai  |
++--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> truncate table loc;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc loc;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| loc_id  | int(4)      | YES  |     | NULL    |       |
+| address | varchar(15) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> drop table loc;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> desc loc;
+ERROR 1146 (42S02): Table 'Week2.loc' doesn't exist
+mysql> insert into department values('Sales', 'Kol', 4);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('Accounts', 'Delhi', 6);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('Production', 'Kol', 1);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into department values('Marketing', 'Kol', 2);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('R&D', 'Delhi', 8);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from department;
++------------+-------+--------+
+| d_name     | d_loc | HOD_id |
++------------+-------+--------+
+| Accounts   | Delhi |      6 |
+| Marketing  | Kol   |      2 |
+| Production | Kol   |      1 |
+| R&D        | Delhi |      8 |
+| Sales      | Kol   |      4 |
++------------+-------+--------+
+5 rows in set (0.00 sec)
+
+ insert into employee(emp_id, f_name, l_name,job_type,salary, dept, date_of_joining) values (1,'Arun','Khan','Manager',90000,'Production','1998-01-04');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from employee;
++--------+--------+--------+----------+--------+------------+------------+------------+-----------------+
+| emp_id | f_name | l_name | job_type | salary | dept       | commission | manager_id | date_of_joining |
++--------+--------+--------+----------+--------+------------+------------+------------+-----------------+
+|      1 | Arun   | Khan   | Manager  |  90000 | Production |       NULL |       NULL | 1998-01-04      |
++--------+--------+--------+----------+--------+------------+------------+------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee(emp_id, f_name, l_name,job_type,salary, dept, date_of_joining) values (2,'Barun','Kumar','Manager',80000,'Marketing','1998-02-09');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee(emp_id, f_name, l_name,job_type,salary, dept, manager_id, date_of_joining) values (3,'Chitra','Kapoor','Engineer',60000,'Production',1, '1998-01-08');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee(emp_id, f_name, l_name,job_type,salary, dept, manager_id, date_of_joining) values (4,'Dheeraj','Mishra','Manager',75000,'Sales',4, '2001-12-27');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee(emp_id, f_name, l_name,job_type,salary, dept, manager_id, date_of_joining) values (5,'Emma','Dutt','Engineer',55000,'Production',1, '2002-03-20');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into employee(emp_id, f_name, l_name,job_type,salary, dept, date_of_joining) values (6,'Floki','Dutt','Accountant',70000,'Accounts', '2002-03-20');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into employee(emp_id, f_name, l_name,job_type,salary, dept,manager_id, date_of_joining) values (7,'Dheeraj','Kumar','Clerk',40000,'Accounts',6, '2016-07-01');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from department;
++------------+-------+--------+
+| d_name     | d_loc | HOD_id |
++------------+-------+--------+
+| Accounts   | Delhi |      6 |
+| Marketing  | Kol   |      2 |
+| Production | Kol   |      1 |
+| R&D        | Delhi |      8 |
+| Sales      | Kol   |      4 |
++------------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select d_name, d_loc from department;
++------------+-------+
+| d_name     | d_loc |
++------------+-------+
+| Accounts   | Delhi |
+| Marketing  | Kol   |
+| Production | Kol   |
+| R&D        | Delhi |
+| Sales      | Kol   |
++------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select f_name, l_name, salary, (salary + 1000) as Bonus_Salary from employee;
++---------+--------+--------+--------------+
+| f_name  | l_name | salary | Bonus_Salary |
++---------+--------+--------+--------------+
+| Arun    | Khan   |  90000 |        91000 |
+| Barun   | Kumar  |  80000 |        81000 |
+| Chitra  | Kapoor |  60000 |        61000 |
+| Dheeraj | Mishra |  75000 |        76000 |
+| Emma    | Dutt   |  55000 |        56000 |
+| Floki   | Dutt   |  70000 |        71000 |
+| Dheeraj | Kumar  |  40000 |        41000 |
+| Saul    | Good   |  60000 |        61000 |
+| Mou     | Bhat   |  30000 |        31000 |
+| Sunny   | Deol   |  20000 |        21000 |
+| Bobby   | Deol   |  35000 |        36000 |
+| Aamir   | Khan   |  15000 |        16000 |
++---------+--------+--------+--------------+
+12 rows in set (0.00 sec)
+
+mysql> select f_name, l_name, (salary * 12) + 1000 as Annual_Salary_with_yearly_bonus, (salary * 12) + 1200 as Annual_Salary_with_monthly_bonus from employee;
++---------+--------+---------------------------------+----------------------------------+
+| f_name  | l_name | Annual_Salary_with_yearly_bonus | Annual_Salary_with_monthly_bonus |
++---------+--------+---------------------------------+----------------------------------+
+| Arun    | Khan   |                         1081000 |                          1081200 |
+| Barun   | Kumar  |                          961000 |                           961200 |
+| Chitra  | Kapoor |                          721000 |                           721200 |
+| Dheeraj | Mishra |                          901000 |                           901200 |
+| Emma    | Dutt   |                          661000 |                           661200 |
+| Floki   | Dutt   |                          841000 |                           841200 |
+| Dheeraj | Kumar  |                          481000 |                           481200 |
+| Saul    | Good   |                          721000 |                           721200 |
+| Mou     | Bhat   |                          361000 |                           361200 |
+| Sunny   | Deol   |                          241000 |                           241200 |
+| Bobby   | Deol   |                          421000 |                           421200 |
+| Aamir   | Khan   |                          181000 |                           181200 |
++---------+--------+---------------------------------+----------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select f_name as NAME, (salary * 12) as ANNSAL from employee;
++---------+---------+
+| NAME    | ANNSAL  |
++---------+---------+
+| Arun    | 1080000 |
+| Barun   |  960000 |
+| Chitra  |  720000 |
+| Dheeraj |  900000 |
+| Emma    |  660000 |
+| Floki   |  840000 |
+| Dheeraj |  480000 |
+| Saul    |  720000 |
+| Mou     |  360000 |
+| Sunny   |  240000 |
+| Bobby   |  420000 |
+| Aamir   |  180000 |
++---------+---------+
+12 rows in set (0.00 sec)
+
+mysql> select l_name as LasT, (salary + 100) as NewSal from employee;
++--------+--------+
+| LasT   | NewSal |
++--------+--------+
+| Khan   |  90100 |
+| Kumar  |  80100 |
+| Kapoor |  60100 |
+| Mishra |  75100 |
+| Dutt   |  55100 |
+| Dutt   |  70100 |
+| Kumar  |  40100 |
+| Good   |  60100 |
+| Bhat   |  30100 |
+| Deol   |  20100 |
+| Deol   |  35100 |
+| Khan   |  15100 |
++--------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|       90000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from employee;
++-------------+
+| min(salary) |
++-------------+
+|       15000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|  52500.0000 |
++-------------+
+1 row in set (0.00 sec)
+
+

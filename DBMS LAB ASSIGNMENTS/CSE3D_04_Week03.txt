@@ -1,0 +1,368 @@
+mysql> select f_name, l_name, job_type from employee;
++---------+--------+------------+
+| f_name  | l_name | job_type   |
++---------+--------+------------+
+| Arun    | Khan   | Manager    |
+| Barun   | Kumar  | Manager    |
+| Chitra  | Kapoor | Engineer   |
+| Dheeraj | Mitra  | Manager    |
+| Emma    | Dutt   | Engineer   |
+| Floki   | Dutt   | Accountant |
+| Dheeraj | Kumar  | Clerk      |
+| Saul    | Good   | Engineer   |
+| Mou     | Bhat   | Clerk      |
+| Sunny   | Deol   | Salesman   |
+| Bobby   | Deol   | Engineer   |
+| Aamir   | Khan   | Salesman   |
++---------+--------+------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from employee;
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+| emp_id | f_name  | l_name | job_type   | salary | commission | dept       | manager_id | DOJ        |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | Marketing  |       NULL | 1998-02-09 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-02-09 |
+|      4 | Dheeraj | Mitra  | Manager    |  75000 |       NULL | Production |          1 | 1998-01-08 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 1998-03-20 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 |
+|      7 | Dheeraj | Kumar  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |          8 | 2014-09-06 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(f_name, ''s ', 'is a ', job_type) from employee;
+    '> select concat(f_name, ''s ', 'is a ', job_type) from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '', 'is a ', job_type) from employee;
+select concat(f_name, ''s ', 'is a ', job_t' at line 1
+mysql> select concat(f_name, ''s ', 'is a ', job_type) from employee;                                                                                                                                       select concat(f_name, ''s ', 'is a ', job_type) from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '', 'is a ', job_type) from employee;
+select concat(f_name, ''s ', 'is a ', job_t' at line 1
+mysql> select concat(f_name, ''s ', 'is a ', job_type) from employee;                                                                                                                                       select concat(f_name, " 's ", " is a ", job_type) from employee;
+    ">     "> 
+    ">     "> select concat(f_name, ''s ', 'is a ', job_type) from employee;                                                                                                                                select concat(f_name, " 's ", " is a ", job_type) from employee;;
+    '> select concat(f_name, ''s ', 'is a ', job_type) from employee;                                                                                                                                       select concat(f_name, " 's ", " is a ", job_type) from employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '', 'is a ', job_type) from employee;
+select concat(f_name, " 's ", " is a ", job' at line 1
++--------------------------------------------+
+| concat(f_name, " 's ", " is a ", job_type) |
++--------------------------------------------+
+| Arun 's  is a Manager                      |
+| Barun 's  is a Manager                     |
+| Chitra 's  is a Engineer                   |
+| Dheeraj 's  is a Manager                   |
+| Emma 's  is a Engineer                     |
+| Floki 's  is a Accountant                  |
+| Dheeraj 's  is a Clerk                     |
+| Saul 's  is a Engineer                     |
+| Mou 's  is a Clerk                         |
+| Sunny 's  is a Salesman                    |
+| Bobby 's  is a Engineer                    |
+| Aamir 's  is a Salesman                    |
++--------------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat(f_name," is a ", job_type) as Employee_Details from employee;
++-----------------------+
+| Employee_Details      |
++-----------------------+
+| Arun is a Manager     |
+| Barun is a Manager    |
+| Chitra is a Engineer  |
+| Dheeraj is a Manager  |
+| Emma is a Engineer    |
+| Floki is a Accountant |
+| Dheeraj is a Clerk    |
+| Saul is a Engineer    |
+| Mou is a Clerk        |
+| Sunny is a Salesman   |
+| Bobby is a Engineer   |
+| Aamir is a Salesman   |
++-----------------------+
+12 rows in set (0.01 sec)
+
+mysql> select concat(f_name, " 's ","monthly salary is ", salary) as Monthly_Salary_Details from employee;
++------------------------------------+
+| Monthly_Salary_Details             |
++------------------------------------+
+| Arun 's monthly salary is 90000    |
+| Barun 's monthly salary is 80000   |
+| Chitra 's monthly salary is 60000  |
+| Dheeraj 's monthly salary is 75000 |
+| Emma 's monthly salary is 55000    |
+| Floki 's monthly salary is 70000   |
+| Dheeraj 's monthly salary is 40000 |
+| Saul 's monthly salary is 60000    |
+| Mou 's monthly salary is 30000     |
+| Sunny 's monthly salary is 20000   |
+| Bobby 's monthly salary is 35000   |
+| Aamir 's monthly salary is 15000   |
++------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select * from department;
++------------+--------+--------+
+| d_name     | d_loc  | HOD_id |
++------------+--------+--------+
+| Production | Kol    |      1 |
+| Marketing  | Kol    |      2 |
+| Sales      | Kol    |      4 |
+| Accounts   | Delhi  |      6 |
+| R&D        | Mumbai |      8 |
++------------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> truncate table department;
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> desc department;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| d_name | varchar(20) | YES  |     | NULL    |       |
+| d_loc  | varchar(10) | YES  |     | NULL    |       |
+| HOD_id | int(4)      | NO   | PRI | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from department;
+Empty set (0.00 sec)
+
+mysql> insert into department values('Sales', 'Kol', 4);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('Accounts', 'Delhi', 6);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('Production', 'Kol', 1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into department values('Marketing', 'Kol', 2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department values('R&D', 'Delhi', 8);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from department;
++------------+-------+--------+
+| d_name     | d_loc | HOD_id |
++------------+-------+--------+
+| Production | Kol   |      1 |
+| Marketing  | Kol   |      2 |
+| Sales      | Kol   |      4 |
+| Accounts   | Delhi |      6 |
+| R&D        | Delhi |      8 |
++------------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select d_name as Department_Names from department;
++------------------+
+| Department_Names |
++------------------+
+| Production       |
+| Marketing        |
+| Sales            |
+| Accounts         |
+| R&D              |
++------------------+
+5 rows in set (0.00 sec)
+
+mysql> select ename as Employee_Names from employee where employee.dept = 'Sales';
+ERROR 1054 (42S22): Unknown column 'ename' in 'field list'
+mysql> select fname as Employee_Names from employee where dept = 'Sales';
+ERROR 1054 (42S22): Unknown column 'fname' in 'field list'
+mysql> select f_name as Employee_Names from employee where dept = 'Sales';
++----------------+
+| Employee_Names |
++----------------+
+| Mou            |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select f_name as Employee_Names from employee where salary > 50000;
++----------------+
+| Employee_Names |
++----------------+
+| Arun           |
+| Barun          |
+| Chitra         |
+| Dheeraj        |
+| Emma           |
+| Floki          |
+| Saul           |
++----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee where manager_id <> 1;
++--------+---------+--------+----------+--------+------------+-----------+------------+------------+
+| emp_id | f_name  | l_name | job_type | salary | commission | dept      | manager_id | DOJ        |
++--------+---------+--------+----------+--------+------------+-----------+------------+------------+
+|      7 | Dheeraj | Kumar  | Clerk    |  40000 |       NULL | Accounts  |          6 | 2016-07-01 |
+|      8 | Saul    | Good   | Engineer |  60000 |       NULL | R&D       |          8 | 2014-09-06 |
+|      9 | Mou     | Bhat   | Clerk    |  30000 |       NULL | Sales     |          4 | 2018-03-08 |
+|     10 | Sunny   | Deol   | Salesman |  20000 |      10000 | Marketing |          2 | 2001-03-31 |
+|     11 | Bobby   | Deol   | Engineer |  35000 |       NULL | R&D       |          8 | 2017-10-17 |
+|     12 | Aamir   | Khan   | Salesman |  15000 |       5000 | Marketing |          2 | 2013-01-11 |
++--------+---------+--------+----------+--------+------------+-----------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where salary > 40000 and salary < 70000;
++--------+--------+--------+----------+--------+------------+------------+------------+------------+
+| emp_id | f_name | l_name | job_type | salary | commission | dept       | manager_id | DOJ        |
++--------+--------+--------+----------+--------+------------+------------+------------+------------+
+|      3 | Chitra | Kapoor | Engineer |  60000 |       NULL | Production |          1 | 1998-02-09 |
+|      5 | Emma   | Dutt   | Engineer |  55000 |       NULL | Production |          1 | 1998-03-20 |
+|      8 | Saul   | Good   | Engineer |  60000 |       NULL | R&D        |          8 | 2014-09-06 |
++--------+--------+--------+----------+--------+------------+------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where manager_id in (1, 6, 8);
++--------+---------+--------+----------+--------+------------+------------+------------+------------+
+| emp_id | f_name  | l_name | job_type | salary | commission | dept       | manager_id | DOJ        |
++--------+---------+--------+----------+--------+------------+------------+------------+------------+
+|      3 | Chitra  | Kapoor | Engineer |  60000 |       NULL | Production |          1 | 1998-02-09 |
+|      4 | Dheeraj | Mitra  | Manager  |  75000 |       NULL | Production |          1 | 1998-01-08 |
+|      5 | Emma    | Dutt   | Engineer |  55000 |       NULL | Production |          1 | 1998-03-20 |
+|      7 | Dheeraj | Kumar  | Clerk    |  40000 |       NULL | Accounts   |          6 | 2016-07-01 |
+|      8 | Saul    | Good   | Engineer |  60000 |       NULL | R&D        |          8 | 2014-09-06 |
+|     11 | Bobby   | Deol   | Engineer |  35000 |       NULL | R&D        |          8 | 2017-10-17 |
++--------+---------+--------+----------+--------+------------+------------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select f_name , salary from employee where l_name like 'K%';
++---------+--------+
+| f_name  | salary |
++---------+--------+
+| Arun    |  90000 |
+| Barun   |  80000 |
+| Chitra  |  60000 |
+| Dheeraj |  40000 |
+| Aamir   |  15000 |
++---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select f_name , salary from employee where l_name like 'K%r';
++---------+--------+
+| f_name  | salary |
++---------+--------+
+| Barun   |  80000 |
+| Chitra  |  60000 |
+| Dheeraj |  40000 |
++---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where l_name like '__o%';
++--------+--------+--------+----------+--------+------------+-----------+------------+------------+
+| emp_id | f_name | l_name | job_type | salary | commission | dept      | manager_id | DOJ        |
++--------+--------+--------+----------+--------+------------+-----------+------------+------------+
+|      8 | Saul   | Good   | Engineer |  60000 |       NULL | R&D       |          8 | 2014-09-06 |
+|     10 | Sunny  | Deol   | Salesman |  20000 |      10000 | Marketing |          2 | 2001-03-31 |
+|     11 | Bobby  | Deol   | Engineer |  35000 |       NULL | R&D       |          8 | 2017-10-17 |
++--------+--------+--------+----------+--------+------------+-----------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where job_type = 'Engineer' and salary > 50000;
++--------+--------+--------+----------+--------+------------+------------+------------+------------+
+| emp_id | f_name | l_name | job_type | salary | commission | dept       | manager_id | DOJ        |
++--------+--------+--------+----------+--------+------------+------------+------------+------------+
+|      3 | Chitra | Kapoor | Engineer |  60000 |       NULL | Production |          1 | 1998-02-09 |
+|      5 | Emma   | Dutt   | Engineer |  55000 |       NULL | Production |          1 | 1998-03-20 |
+|      8 | Saul   | Good   | Engineer |  60000 |       NULL | R&D        |          8 | 2014-09-06 |
++--------+--------+--------+----------+--------+------------+------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where dept = 'Production' or salary > 60000;
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+| emp_id | f_name  | l_name | job_type   | salary | commission | dept       | manager_id | DOJ        |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | Marketing  |       NULL | 1998-02-09 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-02-09 |
+|      4 | Dheeraj | Mitra  | Manager    |  75000 |       NULL | Production |          1 | 1998-01-08 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 1998-03-20 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select max(salary) , min(salary), avg(salary), total(salary) from employee where dept = 'Sales';
+ERROR 1305 (42000): FUNCTION Week3.total does not exist
+mysql> select max(salary) , min(salary), avg(salary), sum(salary) from employee where dept = 'Sales';
++-------------+-------------+-------------+-------------+
+| max(salary) | min(salary) | avg(salary) | sum(salary) |
++-------------+-------------+-------------+-------------+
+|       30000 |       30000 |  30000.0000 |       30000 |
++-------------+-------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from employee groupby dept;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept' at line 1
+mysql> select dept, count(*) from employee groupby dept;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept' at line 1
+mysql> select dept, count(*) from employee group by dept;
++------------+----------+
+| dept       | count(*) |
++------------+----------+
+| Accounts   |        2 |
+| Marketing  |        3 |
+| Production |        4 |
+| R&D        |        2 |
+| Sales      |        1 |
++------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct(count(dept)) from employee;
++---------------+
+| (count(dept)) |
++---------------+
+|            12 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct(count(dept)) as Departments from employee;
++-------------+
+| Departments |
++-------------+
+|          12 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(commission) as Average_Commision from employee;
++-------------------+
+| Average_Commision |
++-------------------+
+|         7500.0000 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select dept, avg(salary) from employee group by dept;
++------------+-------------+
+| dept       | avg(salary) |
++------------+-------------+
+| Accounts   |  55000.0000 |
+| Marketing  |  38333.3333 |
+| Production |  70000.0000 |
+| R&D        |  47500.0000 |
+| Sales      |  30000.0000 |
++------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select dept, sum(salary), job_type from employee group by dept;
+ERROR 1055 (42000): Expression #3 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'Week3.employee.job_type' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select dept, sum(salary) from employee group by dept;
++------------+-------------+
+| dept       | sum(salary) |
++------------+-------------+
+| Accounts   |      110000 |
+| Marketing  |      115000 |
+| Production |      280000 |
+| R&D        |       95000 |
+| Sales      |       30000 |
++------------+-------------+
+5 rows in set (0.00 sec)
+
+

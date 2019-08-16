@@ -1,0 +1,394 @@
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+| emp_id | f_name  | l_name | job_type   | salary | commission | dept       | manager_id | DOJ        |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+
+12 rows in set (0.00 sec)
+
++------------+-------+--------+
+| d_name     | d_loc | hod_id |
++------------+-------+--------+
+| Sales      | Kol   |      4 |
+| Accounts   | Delhi |      6 |
+| Production | Kol   |      1 |
+| Marketing  | Kol   |      2 |
+| R&D        | Delhi |      8 |
++------------+-------+--------+
+
+1.
+
+mysql> select * from employee, department;
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+| emp_id | f_name  | l_name | job_type   | salary | commission | dept       | manager_id | DOJ        | d_name     | d_loc | hod_id |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Sales      | Kol   |      4 |
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Accounts   | Delhi |      6 |
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Production | Kol   |      1 |
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Marketing  | Kol   |      2 |
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | R&D        | Delhi |      8 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Sales      | Kol   |      4 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Accounts   | Delhi |      6 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Production | Kol   |      1 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Marketing  | Kol   |      2 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | R&D        | Delhi |      8 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Sales      | Kol   |      4 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Accounts   | Delhi |      6 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Production | Kol   |      1 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Marketing  | Kol   |      2 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | R&D        | Delhi |      8 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Sales      | Kol   |      4 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Accounts   | Delhi |      6 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Production | Kol   |      1 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Marketing  | Kol   |      2 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | R&D        | Delhi |      8 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Sales      | Kol   |      4 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Accounts   | Delhi |      6 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Production | Kol   |      1 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Marketing  | Kol   |      2 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | R&D        | Delhi |      8 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Sales      | Kol   |      4 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Accounts   | Delhi |      6 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Production | Kol   |      1 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Marketing  | Kol   |      2 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | R&D        | Delhi |      8 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Sales      | Kol   |      4 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Accounts   | Delhi |      6 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Production | Kol   |      1 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Marketing  | Kol   |      2 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | R&D        | Delhi |      8 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Sales      | Kol   |      4 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Accounts   | Delhi |      6 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Production | Kol   |      1 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Marketing  | Kol   |      2 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | R&D        | Delhi |      8 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Sales      | Kol   |      4 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Accounts   | Delhi |      6 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Production | Kol   |      1 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Marketing  | Kol   |      2 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | R&D        | Delhi |      8 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Sales      | Kol   |      4 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Accounts   | Delhi |      6 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Production | Kol   |      1 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Marketing  | Kol   |      2 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | R&D        | Delhi |      8 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Sales      | Kol   |      4 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Accounts   | Delhi |      6 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Production | Kol   |      1 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Marketing  | Kol   |      2 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | R&D        | Delhi |      8 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Sales      | Kol   |      4 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Accounts   | Delhi |      6 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Production | Kol   |      1 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Marketing  | Kol   |      2 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | R&D        | Delhi |      8 |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+
+2. 
+mysql> select f_name , l_name , d_loc from employee, department where employee.dept = department.d_name;
++---------+--------+-------+
+| f_name  | l_name | d_loc |
++---------+--------+-------+
+| Arun    | Khan   | Kol   |
+| Barun   | Kumar  | Kol   |
+| Chitra  | Kapoor | Kol   |
+| Dheeraj | Mishra | Kol   |
+| Emma    | Dutt   | Kol   |
+| Floki   | Dutt   | Delhi |
+| Dheeraj | Kuamr  | Delhi |
+| Saul    | Good   | Delhi |
+| Mou     | Bhat   | Kol   |
+| Sunny   | Deol   | Kol   |
+| Bobby   | Deol   | Delhi |
+| Aamir   | Khan   | Kol   |
++---------+--------+-------+
+
+3. 
+
+mysql> select f_name, l_name , DOJ from employee, department where employee.dept = department.d_name and department.d_loc = 'Delhi';
++---------+--------+------------+
+| f_name  | l_name | DOJ        |
++---------+--------+------------+
+| Floki   | Dutt   | 2000-07-16 |
+| Dheeraj | Kuamr  | 2016-07-01 |
+| Saul    | Good   | 2014-09-06 |
+| Bobby   | Deol   | 2017-10-17 |
++---------+--------+------------+
+
+4.
+
+mysql> select * from emp_address;
++--------+--------------+------------+-------------+
+| emp_id | city         | district   | state       |
++--------+--------------+------------+-------------+
+|      1 | Suri         | Birbhum    | WB          |
+|      2 | Kolkata      | Kolkata    | WB          |
+|      3 | Bhubaneshwar | Khurda     | Odisha      |
+|      4 | Durgapur     | Burdwan    | WB          |
+|      5 | Noida        | GB Nagar   | UP          |
+|      6 | Secunderabad | Hyderabad  | Telangana   |
+|      7 | Dehradun     | Dehradun   | Uttarakhand |
+|      8 | Asansol      | Burdwan    | WB          |
+|      9 | Siliguri     | Darjeeling | WB          |
+|     10 | Kolkata      | Kolkata    | WB          |
+|     11 | Jalpaiguri   | Jalpaiguri | WB          |
+|     12 | New Delhi    | New Delhi  | Delhi       |
++--------+--------------+------------+-------------+
+
+5.
+
+mysql> select f_name, l_name, d_loc, city from employee, department, emp_address where employee.dept = department.d_name and employee.emp_id = emp_address.emp_id;
++---------+--------+-------+--------------+
+| f_name  | l_name | d_loc | city         |
++---------+--------+-------+--------------+
+| Arun    | Khan   | Kol   | Suri         |
+| Barun   | Kumar  | Kol   | Kolkata      |
+| Chitra  | Kapoor | Kol   | Bhubaneshwar |
+| Dheeraj | Mishra | Kol   | Durgapur     |
+| Emma    | Dutt   | Kol   | Noida        |
+| Floki   | Dutt   | Delhi | Secunderabad |
+| Dheeraj | Kuamr  | Delhi | Dehradun     |
+| Saul    | Good   | Delhi | Asansol      |
+| Mou     | Bhat   | Kol   | Siliguri     |
+| Sunny   | Deol   | Kol   | Kolkata      |
+| Bobby   | Deol   | Delhi | Jalpaiguri   |
+| Aamir   | Khan   | Kol   | New Delhi    |
++---------+--------+-------+--------------+
+
+6.
+mysql> select f_name, l_name from employee where job_type = 'Manager';
++---------+--------+
+| f_name  | l_name |
++---------+--------+
+| Arun    | Khan   |
+| Barun   | Kumar  |
+| Dheeraj | Mishra |
++---------+--------+
+
+7.
+
+mysql> select * from job_grades;
++-------+------------+-------------+
+| grade | lowest_sal | highest_sal |
++-------+------------+-------------+
+| A     |      10000 |       24999 |
+| B     |      25000 |       49999 |
+| C     |      50000 |      100000 |
++-------+------------+-------------+
+
+8.
+mysql> select f_name, l_name ,salary, grade from employee, job_grades where employee.salary >= job_grades.lowest_sal and employee.salary <= job_grades.highest_sal;
++---------+--------+--------+-------+
+| f_name  | l_name | salary | grade |
++---------+--------+--------+-------+
+| Arun    | Khan   |  90000 | C     |
+| Barun   | Kumar  |  80000 | C     |
+| Chitra  | Kapoor |  60000 | C     |
+| Dheeraj | Mishra |  75000 | C     |
+| Emma    | Dutt   |  55000 | C     |
+| Floki   | Dutt   |  70000 | C     |
+| Dheeraj | Kuamr  |  40000 | B     |
+| Saul    | Good   |  60000 | C     |
+| Mou     | Bhat   |  30000 | B     |
+| Sunny   | Deol   |  20000 | A     |
+| Bobby   | Deol   |  35000 | B     |
+| Aamir   | Khan   |  15000 | A     |
++---------+--------+--------+-------+
+
+9.
+mysql> insert into employee values(13, 'Debjit', 'Chatterjee', 'Engineer', 75000, null, null ,null, '2019-01-11');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into employee values(14, 'Soumyadip', 'Chowdhury', 'Engineer', 85000, null, null ,null, '2019-06-11');
+Query OK, 1 row affected (0.03 sec)
+
+10.
+mysql> insert into department values('HR', 'LA', 7);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into department values('Developers', 'San Diego', 11);
+Query OK, 1 row affected (0.03 sec)
+
+11.
+mysql> select * from employee natural join department;
++--------+-----------+------------+------------+--------+------------+------------+------------+------------+------------+-----------+--------+
+| emp_id | f_name    | l_name     | job_type   | salary | commission | dept       | manager_id | DOJ        | d_name     | d_loc     | hod_id |
++--------+-----------+------------+------------+--------+------------+------------+------------+------------+------------+-----------+--------+
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Sales      | Kol       |      4 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Accounts   | Delhi     |      6 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Production | Kol       |      1 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Marketing  | Kol       |      2 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | R&D        | Delhi     |      8 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | HR         | LA        |      7 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Developers | San Diego |     11 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Sales      | Kol       |      4 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Accounts   | Delhi     |      6 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Production | Kol       |      1 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Marketing  | Kol       |      2 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | R&D        | Delhi     |      8 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | HR         | LA        |      7 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Developers | San Diego |     11 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Sales      | Kol       |      4 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Accounts   | Delhi     |      6 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Production | Kol       |      1 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Marketing  | Kol       |      2 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | R&D        | Delhi     |      8 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | HR         | LA        |      7 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Developers | San Diego |     11 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Sales      | Kol       |      4 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Accounts   | Delhi     |      6 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Production | Kol       |      1 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Marketing  | Kol       |      2 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | R&D        | Delhi     |      8 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | HR         | LA        |      7 |
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Developers | San Diego |     11 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Sales      | Kol       |      4 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Accounts   | Delhi     |      6 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Production | Kol       |      1 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Marketing  | Kol       |      2 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | R&D        | Delhi     |      8 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | HR         | LA        |      7 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Developers | San Diego |     11 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Sales      | Kol       |      4 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Accounts   | Delhi     |      6 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Production | Kol       |      1 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Marketing  | Kol       |      2 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | R&D        | Delhi     |      8 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | HR         | LA        |      7 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Developers | San Diego |     11 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Sales      | Kol       |      4 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Accounts   | Delhi     |      6 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Production | Kol       |      1 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Marketing  | Kol       |      2 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | R&D        | Delhi     |      8 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | HR         | LA        |      7 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Developers | San Diego |     11 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Sales      | Kol       |      4 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Accounts   | Delhi     |      6 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Production | Kol       |      1 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Marketing  | Kol       |      2 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | R&D        | Delhi     |      8 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | HR         | LA        |      7 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | Developers | San Diego |     11 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Sales      | Kol       |      4 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Accounts   | Delhi     |      6 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Production | Kol       |      1 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Marketing  | Kol       |      2 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | R&D        | Delhi     |      8 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | HR         | LA        |      7 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Developers | San Diego |     11 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Sales      | Kol       |      4 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Accounts   | Delhi     |      6 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Production | Kol       |      1 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Marketing  | Kol       |      2 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | R&D        | Delhi     |      8 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | HR         | LA        |      7 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Developers | San Diego |     11 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Sales      | Kol       |      4 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Accounts   | Delhi     |      6 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Production | Kol       |      1 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Marketing  | Kol       |      2 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | R&D        | Delhi     |      8 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | HR         | LA        |      7 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | Developers | San Diego |     11 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Sales      | Kol       |      4 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Accounts   | Delhi     |      6 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Production | Kol       |      1 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Marketing  | Kol       |      2 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | R&D        | Delhi     |      8 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | HR         | LA        |      7 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Developers | San Diego |     11 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | Sales      | Kol       |      4 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | Accounts   | Delhi     |      6 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | Production | Kol       |      1 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | Marketing  | Kol       |      2 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | R&D        | Delhi     |      8 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | HR         | LA        |      7 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | Developers | San Diego |     11 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | Sales      | Kol       |      4 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | Accounts   | Delhi     |      6 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | Production | Kol       |      1 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | Marketing  | Kol       |      2 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | R&D        | Delhi     |      8 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | HR         | LA        |      7 |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | Developers | San Diego |     11 |
++--------+-----------+------------+------------+--------+------------+------------+------------+------------+------------+-----------+--------+
+98 rows in set (0.00 sec)
+
+12.
+mysql> select * from employee inner join department on employee.dept = department.d_name;
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+| emp_id | f_name  | l_name | job_type   | salary | commission | dept       | manager_id | DOJ        | d_name     | d_loc | hod_id |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Production | Kol   |      1 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Marketing  | Kol   |      2 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Production | Kol   |      1 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Sales      | Kol   |      4 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Production | Kol   |      1 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Accounts   | Delhi |      6 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Accounts   | Delhi |      6 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | R&D        | Delhi |      8 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Sales      | Kol   |      4 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Marketing  | Kol   |      2 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | R&D        | Delhi |      8 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Marketing  | Kol   |      2 |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+12 rows in set (0.00 sec)
+
+13.
+mysql> select * from employee left join department on employee.dept = department.d_name;
++--------+-----------+------------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+| emp_id | f_name    | l_name     | job_type   | salary | commission | dept       | manager_id | DOJ        | d_name     | d_loc | hod_id |
++--------+-----------+------------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+|      4 | Dheeraj   | Mishra     | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Sales      | Kol   |      4 |
+|      9 | Mou       | Bhat       | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Sales      | Kol   |      4 |
+|      6 | Floki     | Dutt       | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Accounts   | Delhi |      6 |
+|      7 | Dheeraj   | Kuamr      | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Accounts   | Delhi |      6 |
+|      1 | Arun      | Khan       | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Production | Kol   |      1 |
+|      3 | Chitra    | Kapoor     | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Production | Kol   |      1 |
+|      5 | Emma      | Dutt       | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Production | Kol   |      1 |
+|      2 | Barun     | Kumar      | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Marketing  | Kol   |      2 |
+|     10 | Sunny     | Deol       | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Marketing  | Kol   |      2 |
+|     12 | Aamir     | Khan       | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Marketing  | Kol   |      2 |
+|      8 | Saul      | Good       | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | R&D        | Delhi |      8 |
+|     11 | Bobby     | Deol       | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | R&D        | Delhi |      8 |
+|     13 | Debjit    | Chatterjee | Engineer   |  75000 |       NULL | NULL       |       NULL | 2019-01-11 | NULL       | NULL  |   NULL |
+|     14 | Soumyadip | Chowdhury  | Engineer   |  85000 |       NULL | NULL       |       NULL | 2019-06-11 | NULL       | NULL  |   NULL |
++--------+-----------+------------+------------+--------+------------+------------+------------+------------+------------+-------+--------+
+14 rows in set (0.00 sec)
+
+
+14.
+mysql> select * from employee right join department on employee.dept = department.d_name;
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-----------+--------+
+| emp_id | f_name  | l_name | job_type   | salary | commission | dept       | manager_id | DOJ        | d_name     | d_loc     | hod_id |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-----------+--------+
+|      1 | Arun    | Khan   | Manager    |  90000 |       NULL | Production |       NULL | 1998-01-04 | Production | Kol       |      1 |
+|      2 | Barun   | Kumar  | Manager    |  80000 |       NULL | MArketing  |       NULL | 1998-02-09 | Marketing  | Kol       |      2 |
+|      3 | Chitra  | Kapoor | Engineer   |  60000 |       NULL | Production |          1 | 1998-08-08 | Production | Kol       |      1 |
+|      4 | Dheeraj | Mishra | Manager    |  75000 |       NULL | Sales      |          4 | 2001-12-27 | Sales      | Kol       |      4 |
+|      5 | Emma    | Dutt   | Engineer   |  55000 |       NULL | Production |          1 | 2002-03-20 | Production | Kol       |      1 |
+|      6 | Floki   | Dutt   | Accountant |  70000 |       NULL | Accounts   |       NULL | 2000-07-16 | Accounts   | Delhi     |      6 |
+|      7 | Dheeraj | Kuamr  | Clerk      |  40000 |       NULL | Accounts   |          6 | 2016-07-01 | Accounts   | Delhi     |      6 |
+|      8 | Saul    | Good   | Engineer   |  60000 |       NULL | R&D        |       NULL | 2014-09-06 | R&D        | Delhi     |      8 |
+|      9 | Mou     | Bhat   | Clerk      |  30000 |       NULL | Sales      |          4 | 2018-03-08 | Sales      | Kol       |      4 |
+|     10 | Sunny   | Deol   | Salesman   |  20000 |      10000 | Marketing  |          2 | 2001-03-31 | Marketing  | Kol       |      2 |
+|     11 | Bobby   | Deol   | Engineer   |  35000 |       NULL | R&D        |          8 | 2017-10-17 | R&D        | Delhi     |      8 |
+|     12 | Aamir   | Khan   | Salesman   |  15000 |       5000 | Marketing  |          2 | 2013-01-11 | Marketing  | Kol       |      2 |
+|   NULL | NULL    | NULL   | NULL       |   NULL |       NULL | NULL       |       NULL | NULL       | HR         | LA        |      7 |
+|   NULL | NULL    | NULL   | NULL       |   NULL |       NULL | NULL       |       NULL | NULL       | Developers | San Diego |     11 |
++--------+---------+--------+------------+--------+------------+------------+------------+------------+------------+-----------+--------+
+14 rows in set (0.00 sec)
+
+
+
